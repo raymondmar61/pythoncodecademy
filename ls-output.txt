@@ -1,0 +1,19 @@
+conditionalscontrolflow.py
+dateandtime.py
+functions.py
+ls-output.txt
+pyglatin.py
+pythonsyntax.py
+stringconsoleoutput.py
+takingavacation.py
+tipcalculator.py
+total 36
+-rw-rw-r-- 1 mar mar 1892 Jun 22 19:45 conditionalscontrolflow.py
+-rw-rw-r-- 1 mar mar  667 Jun 22 19:15 dateandtime.py
+-rw-rw-r-- 1 mar mar 3068 Jun 23 01:38 functions.py
+-rw-rw-r-- 1 mar mar  156 Jun 23 14:16 ls-output.txt
+-rwxrwx--- 1 mar mar  459 Jun 23 00:54 pyglatin.py
+-rw-rw-r-- 1 mar mar  367 Jun 22 01:39 pythonsyntax.py
+-rw-rw-r-- 1 mar mar 1520 Jun 22 02:13 stringconsoleoutput.py
+-rw-rw-r-- 1 mar mar 1236 Jun 23 02:06 takingavacation.py
+-rw-rw-r-- 1 mar mar  245 Jun 22 01:46 tipcalculator.py
