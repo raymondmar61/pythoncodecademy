@@ -1,4 +1,4 @@
-#Python Syntax
+#1 Python Syntax
 print("Welcome to Python!")
 myvariable = 10
 myinteger = 7
@@ -18,7 +18,7 @@ print(108/9) #print 12.0
 print(108//9) #print 12
 print("\n")
 
-#Strings & Console Output
+#2 Strings & Console Output
 brian = "Hello life!"
 print(brian) #print Hello life!
 fifthletter = "monty"
@@ -53,7 +53,7 @@ print("%s/%s/%s" % (now.month, now.day, now.year)) #print 7/24/2017
 print("%s:%s:%s" % (now.hour, now.minute, now.second)) #print 11:59:39
 print("%s/%s/%s %s:%s:%s" % (now.month, now.day, now.year, now.hour, now.minute, now.second)) #print 7/24/2017 12:1:49
 
-#Conditionals and Control Flow
+#3 Conditionals and Control Flow
 def clinic():
 	print("You've just entered the clinic!")
 	print("Do you take the door on the left or the right?")
@@ -108,6 +108,7 @@ def pyglatin(word):
 #pyglatin(word)
 print("\n")
 
+#4 Functions
 #Functions override add a space separating functions
 def tax(bill):
 	bill = bill * 1.08
@@ -188,4 +189,179 @@ def distaincefromzero(variable):
 		return "Nope"
 print(distaincefromzero(-55)) #print 55
 print(distaincefromzero("parrot")) #print Nope
-#start Taking a Vacation
+
+def hotelcost(nights):
+	return 140 * nights
+def planeridecost(city):
+	if city == "Charlotte":
+		return 183
+	elif city == "Tampa":
+		return 220
+	elif city == "Pittsburgh":
+		return 222
+	elif city == "Los Angeles":
+		return 478
+def rentalcarcost(days):
+	if days >= 7:
+		cost = (40 * days) - 50
+		return cost
+	elif days >= 3:
+		cost = (40 * days) - 20
+		return cost
+	else:
+		cost = 40 * days
+		return cost
+def tripcost(city, days, spendingmoney):
+	return (rentalcarcost(days) + planeridecost(city) + hotelcost(days-1) + spendingmoney) #notice hotelcost(days) instead of hotelcost(nights) and def tripcost(city, days) instead of def tripcost(city, days, nights)
+print(tripcost("Los Angeles",5,1000)) #print 2218
+print("\n")
+
+#5 Lists and Dictionaries
+zooanimals = ["pangolin", "cassowary", "sloth", "tiger"]
+print(len(zooanimals)) #print 4
+print(zooanimals[1]) #print cassowary
+print("The fourth animal at the size is the " +zooanimals[3]) #print he fourth animal at the size is the tiger
+numbers = [5, 6, 7, 8]
+print(numbers[1] + numbers[3]) #print 14
+zooanimals[3] = "shark"
+print(zooanimals) #print ['pangolin', 'cassowary', 'sloth', 'shark']
+zooanimals.append("lion")
+print(zooanimals) #print ['pangolin', 'cassowary', 'sloth', 'shark', 'lion']
+print(zooanimals[1:3]) #print ['cassowary', 'sloth'] We start counting indices from 0 and that we stopped before index 3
+animals = "catdogfrog"
+print(animals[0:3]) #print cat
+print(animals[3:6]) #print dog
+print(animals[6:]) #print frog
+zooanimals = ["pangolin", "cassowary", "sloth", "tiger"]
+print(zooanimals.index("cassowary")) #print 1
+zooanimals.insert(1, "shark") 
+#or
+#zooanimals.insert(zooanimals.index("cassowary"), "shark")
+print(zooanimals) #['pangolin', 'shark', 'cassowary', 'sloth', 'tiger']
+print(zooanimals.index("cassowary")) #print 2
+zooanimals.sort()
+zooanimalssorted = []
+for eachzooanimals in zooanimals:
+	print(eachzooanimals, end = " ")
+	zooanimalssorted.append(eachzooanimals) #it appears a for loop required to print a sorted list
+print("\n")
+print(zooanimalssorted) #print ['cassowary', 'pangolin', 'shark', 'sloth', 'tiger']
+zooanimalssorted.remove("sloth")
+print(zooanimalssorted) #print ['cassowary', 'pangolin', 'shark', 'tiger']
+numbers = [5, 6, 7, 8]
+for eachnumber in numbers:
+	print(eachnumber * 2, end=" ")
+print("\n")
+residents = {"Puffin": 104, "Sloth": 105, "Burmese Python": 106}
+print(residents) #print {'Sloth': 105, 'Puffin': 104, 'Burmese Python': 106}
+print(residents["Puffin"]) #print 104
+menu = {}
+menu["Chicken Alfredo"] = 14.50
+print(menu) #print {'Chicken Alfredo': 14.5}
+menu['Hamburger'] = 10.00 #add key: item to menu dictionary
+menu['BBQ Chicken'] = 7.50 #add key: item to menu dictionary
+menu['Ham Sandwich'] = 6.25 #add key: item to menu dictionary
+print(len(menu)) #print 4
+print(menu) #print {'Ham Sandwich': 6.25, 'Chicken Alfredo': 14.5, 'BBQ Chicken': 7.5, 'Hamburger': 10.0}
+del menu["Chicken Alfredo"]
+print(menu) #print {'Ham Sandwich': 6.25, 'BBQ Chicken': 7.5, 'Hamburger': 10.0}
+menu["Ham Sandwich"] = 20.00
+print(menu) #print {'Ham Sandwich': 20.0, 'BBQ Chicken': 7.5, 'Hamburger': 10.0}
+mydictionary = {"fish": ["c", "a", "r", "p"], "cash": -4483, "luck":"good"}
+print(mydictionary["fish"]) #print ['c', 'a', 'r', 'p']
+print(mydictionary["fish"][2]) #print r
+mydictionary["inventory"] = ["rations","flashlight","sleeping bag"]
+print(mydictionary) #print {'cash': -4483, 'fish': ['c', 'a', 'r', 'p'], 'luck': 'good', 'inventory': ['rations', 'flashlight', 'sleeping bag']}
+mydictionary["fish"].sort() #sort key fish's list in dictionary mydictionary
+print(mydictionary) #print {'luck': 'good', 'inventory': ['rations', 'flashlight', 'sleeping bag'], 'fish': ['a', 'c', 'p', 'r'], 'cash': -4483}
+mydictionary["fish"].remove("p")
+print(mydictionary) #print {'luck': 'good', 'inventory': ['rations', 'flashlight', 'sleeping bag'], 'fish': ['a', 'c', 'r'], 'cash': -4483}
+mydictionary["cash"] = 1000
+print(mydictionary) #print {'luck': 'good', 'inventory': ['rations', 'flashlight', 'sleeping bag'], 'fish': ['a', 'c', 'r'], 'cash': 1000}
+for eachword in "abcxyz123":
+	print(eachword, end="")
+print("\n")
+webster = {
+	"Aardvark" : "A star of a popular children's cartoon show.", "Baa" : "The sound a goat makes.", "Carpet": "Goes on the floor.", "Dab": "A small amount."}
+for eachwebster in webster:
+	print(eachwebster) #print webster's key
+	print(webster[eachwebster]) #print webster's item
+def countnumbers(numbers):
+	total = 0
+	for n in numbers:
+		total = total + 1
+	return total
+listnumbers = [4, 8, 15, 16, 23, 42]
+print(countnumbers(listnumbers)) #print 6
+def fizzcount(x):
+	count = 0
+	for eachitem in x:
+		if eachitem == 'fizz':
+			count = count + 1
+	return count
+fizzlist = ['fizz', 'wizz', 'jizz', 'fizz']
+print(fizzcount(fizzlist)) #print 2
+prices = {"banana": 4, "apple": 2, "orange": 1.5, "pear": 3}
+stock = {"banana":6, "apple": 0, "orange": 32, "pear": 15}
+total = 0
+for eachkey in prices:
+	print(eachkey) #print prices' key
+	print(eachkey+" price:", prices[eachkey]) #print prices' prices
+	print(eachkey+" stock:", stock[eachkey]) #print prices' stock
+	total = total + (prices[eachkey]*stock[eachkey])
+	print("running total",total)
+print("grand total",total)
+groceries = ["banana","orange","apple"]
+def computebill(food):
+	total = 0
+	for eachfood in food:
+		if stock[eachfood] > 0:
+			total = total + prices[eachfood]
+			stock[eachfood] = stock[eachfood] - 1
+	return total
+print(computebill(groceries)) #print 7.5.  4 + 1.5 = 5.5.  Apple is excluded because its stock is 0.
+print(stock) #orange minus one and banana minus one
+
+#6 Student Becomes The Teacher "Challenge Course"
+lloyd = {"name": "Lloyd", "homework":[0.0, 97.0, 75.0, 92.0], "quizzes":[88.0, 40.0, 94.0], "tests":[75.0, 90.0]}
+alice = {"name": "Alice", "homework":[100.0, 92.0, 98.0, 100.0], "quizzes":[82.0, 83.0, 91.0], "tests":[89.0, 97.0]}
+tyler = {"name": "Tyler", "homework":[0.0, 87.0, 75.0, 22.0], "quizzes":[0.0, 75.0, 78.0], "tests":[100.0, 100.0]}
+print(lloyd) #print {'name': 'Lloyd', 'homework': [0.0, 97.0, 75.0, 92.0], 'quizzes': [88.0, 40.0, 94.0], 'tests': [75.0, 90.0]}
+students = [lloyd, alice, tyler]
+print(students) #print [{'name': 'Lloyd', 'quizzes': [88.0, 40.0, 94.0], 'tests': [75.0, 90.0], 'homework': [0.0, 97.0, 75.0, 92.0]}, {'name': 'Alice', 'quizzes': [82.0, 83.0, 91.0], 'tests': [89.0, 97.0], 'homework': [100.0, 92.0, 98.0, 100.0]}, {'name': 'Tyler', 'quizzes': [0.0, 75.0, 78.0], 'tests': [100.0, 100.0], 'homework': [0.0, 87.0, 75.0, 22.0]}]
+for eachstudents in students:
+	print(eachstudents["name"])
+	print(eachstudents["homework"])
+	print(eachstudents["quizzes"])
+	print(eachstudents["tests"])
+def average(numbers):
+	sumnumbers = sum(numbers)
+	average = sumnumbers / len(numbers)
+	return average
+print(average(lloyd["homework"])) #print 66.0
+def getaverage(student):
+	averagescore = (average(student["homework"])*.10) + (average(student["quizzes"])*.30) + (average(student["tests"])*.60)
+	return averagescore
+def getlettergrade(score):
+	if score >= 90:
+		return "A"
+	elif score >= 80:
+		return "B"	
+	elif score >= 70:
+		return "C"
+	elif score >= 60:
+		return "D"
+	else:
+		return "F"
+for eachstudents in students:
+	print(eachstudents["name"]+ " average score is below")
+	print(getaverage(eachstudents))
+	print(getlettergrade(getaverage(eachstudents)))
+def getclassaverage(students):
+	results = []
+	for eachstudents in students:
+		results.append(getaverage(eachstudents)) #called function getaverage.  A function can call another function.  Must use return statement.
+	return (average(results))
+print(getclassaverage(students)) #print 83.11666666...
+print(getlettergrade(getclassaverage(students))) #print B
+#start 7 Lists and Functions
