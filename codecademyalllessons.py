@@ -52,6 +52,7 @@ print(now.day) #print 21
 print("%s/%s/%s" % (now.month, now.day, now.year)) #print 7/24/2017
 print("%s:%s:%s" % (now.hour, now.minute, now.second)) #print 11:59:39
 print("%s/%s/%s %s:%s:%s" % (now.month, now.day, now.year, now.hour, now.minute, now.second)) #print 7/24/2017 12:1:49
+print("\n")
 
 #3 Conditionals and Control Flow
 def clinic():
@@ -321,6 +322,7 @@ def computebill(food):
 	return total
 print(computebill(groceries)) #print 7.5.  4 + 1.5 = 5.5.  Apple is excluded because its stock is 0.
 print(stock) #orange minus one and banana minus one
+print("\n")
 
 #6 Student Becomes The Teacher "Challenge Course"
 lloyd = {"name": "Lloyd", "homework":[0.0, 97.0, 75.0, 92.0], "quizzes":[88.0, 40.0, 94.0], "tests":[75.0, 90.0]}
@@ -364,4 +366,73 @@ def getclassaverage(students):
 	return (average(results))
 print(getclassaverage(students)) #print 83.11666666...
 print(getlettergrade(getclassaverage(students))) #print B
-#start 7 Lists and Functions
+print("\n")
+
+#7 Lists and Functions
+nlist = [1, 3, 5]
+nlist[1] = nlist[1] * 5
+print(nlist[1]) #print 15
+print(nlist) #print[1, 15, 5]
+nlist = [1, 3, 5]
+nlist.pop(1) #remove the item at index number 1.  Returns the item.
+print(nlist) #print [1, 5]
+nlist = [1, 3, 5]
+nlist.remove(5) #removes the item specified in paranthesis; in this case, removes the 5
+print(nlist) #print [1, 3]
+nlist = [1, 3, 5]
+del(nlist[1]) #remove the item at index number 1.  It doesn't return it.  Like .pop()
+print(nlist)
+def firstitem(items):
+	print(items[0])
+firstitem([2, 7, 9]) #return 2
+
+def listfunction(x):
+	x[1] = x[1] + 3
+	return x
+print(listfunction([3, 5, 7])) #print [3, 8, 7]
+
+def forloopslist(x):
+	for i in range(0,len(x)):
+		print(x[i])
+	for i2 in range(0, len(x)):
+		x[i2] = x[i2] * 2
+		print(x)
+	print(x)
+forloopslist([3,5,7]) #return 3\n 5\n 7\n [6, 5, 7]\n [6, 10, 7]\n [6, 10, 14]\n [6, 10, 14]
+#range(start, stop, step) range() returns a list of numbers from start up to (but not including) stop. Each item increases by step.
+print(range(0,6)) #print range(0,6)
+print(list(range(0,6))) #print [0, 1, 2, 3, 4, 5]
+for eachnumber in range(0,6):
+	print(eachnumber,end=" ") #print 0, 1, 2, 3, 4, 5
+# def rangefunction(x):
+# 	for i in range(0, len(x)):
+# 		x[i] = x[i] * 2
+# 	return x
+# print(rangefunction(range(0,3))) Error message TypeError
+def sumlistnumbers(numbers):
+	result = 0
+	print(numbers) #print [10, 11, 12, 13, 14, 15]
+	for i in range(0, len(numbers)):
+		result = result + numbers[i]
+	return result
+print(sumlistnumbers(list(range(10,16)))) #print 75
+def sumliststrings(words):
+	result = ""
+	for w in range(0, len(words)):
+		result = result + (words[w]+" ")
+	return result
+namelist = ["Michael","Liberman","III"]
+print(sumliststrings(namelist)) #print Michael Liberman III
+def joinedlists(x, y):
+	print(x+y) #print [1, 2, 3, 4, 5, 6]
+	return(x+y)
+print(joinedlists([1,2,3],[4,5,6])) #print [1, 2, 3, 4, 5, 6]
+longnumbers = [[1, 2, 3], [4, 5, 6, 7, 8, 9]]
+def flatnumbers(lists):
+	results = []
+	for eachlist in lists:
+		for eachnumber in eachlist:
+			results.append(eachnumber)
+	return results
+print(flatnumbers(longnumbers)) #print [1, 2, 3, 4, 5, 6, 7, 8, 9]
+#start Battleship
