@@ -435,4 +435,66 @@ def flatnumbers(lists):
 			results.append(eachnumber)
 	return results
 print(flatnumbers(longnumbers)) #print [1, 2, 3, 4, 5, 6, 7, 8, 9]
-#start Battleship
+print("\n")
+
+#Battleship
+#In this project you will build a simplified, one-player version of the classic board game Battleship! In this version of the game, there will be a single ship hidden in a random location on a 5x5 grid. The player will have 10 guesses to try to sink the ship.
+from random import randint
+board = []
+for i in range(0,5):
+	board.append(["O"] * 5)
+print(board) #print [['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O'], ['O', 'O', 'O', 'O', 'O']]
+# for eachboard in board:
+# 	print(eachboard)
+#--for loop above works to print each board on its separate line
+def printboard(board):
+	for eachboard in board:
+		print(" ".join(eachboard))
+printboard(board)
+# letters = ["a","b","c","d","e"]
+# print(letters) #print ['a', 'b', 'c', 'd', 'e']
+# print(" ".join(letters)) #print a b c d e #The .join() method uses the string to combine the items in the list.
+# print(letters) #print ['a', 'b', 'c', 'd', 'e']
+# print("---".join(letters)) #print a---b---c---d---e
+def randomrow(board):
+	return(randint(0,len(board)-1))
+def randomcolumn(board):
+	return(randint(0,len(board)-1))
+shiprow = randomrow(board)
+shipcolumn = randomcolumn(board)
+print(shiprow+1, shipcolumn+1)
+# guessrow = int(input("Guess row: "))
+# guesscolumn = int(input("Guess column: "))
+# for turn in range(1,5):
+# 	print("Turn", turn)
+# 	guessbattleship = input("Guess row column separated by a space ")
+# 	guessbattleship = guessbattleship.split(" ")
+# 	guessrow = int(guessbattleship[0]) - 1
+# 	guesscolumn = int(guessbattleship[1]) - 1
+# 	if (guessrow == shiprow) and (guesscolumn == shipcolumn):
+# 		print("Congratulations! You sank my battleship")
+# 		board[shiprow][shipcolumn] = "!"
+# 		printboard(board)
+# 		break	
+# 	else:
+# 		if (guessrow < 0 or guessrow > 5) or (guesscolumn < 0 or guesscolumn > 5):
+# 			print("Oops, that's not even in the ocean.")
+# 			continue
+# 		elif (board[guessrow][guesscolumn] == "X"):
+# 			print("You guessed that one already")
+# 			continue
+# 		else:
+# 			print("You missed my battleship!")
+# 			board[guessrow][guesscolumn] = "X"
+# 		printboard(board)
+# 	if turn == 4:
+# 		print("Game Over")
+# 		board[shiprow][shipcolumn] = "!"
+# 		printboard(board)
+# 		break
+print("\n")
+
+#start Loops
+
+			
+
