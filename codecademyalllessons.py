@@ -494,7 +494,231 @@ print(shiprow+1, shipcolumn+1)
 # 		break
 print("\n")
 
-#start Loops
+#8 Loops
+# choice = input("Enjoying the course? (y/n) ")
+# while choice != "y" and choice != "n":
+# 	choice = input("Sorry, I didn't catch that.  Enter (y/n): ")
+count = 0
+while True:
+	print(count)
+	count += 1
+	if count >= 10:
+		print(count,"break time exit loop.")
+		break
+#while/else.  The else block will execute anytime the loop condition is evaluated to False.  Python 2.7 only?  Works with Python 3.5.
+from random import randint
+print("Lucky numbers.  Three numbers generated.  If one of the three is a 5, you lose.")
+count = 0
+while count < 3:
+	number = randint(1,5)
+	print(number)
+	if number == 5:
+		print(number,"you lose")
+		break
+	count += 1
+else:
+	print("You win")
+# computernumber = randint(1,10)
+# print("Cheat",computernumber)
+# guesses = 3
+# while guesses > 0:
+# 	print(guesses,"remaining")
+# 	usernumber = int(input("Guess the number: "))
+# 	if usernumber == computernumber:
+# 		print(usernumber, "is correct")
+# 		break
+# 	print("Incorrect")
+# 	guesses -= 1
+# else:
+# 	print("You lose")
+#Create a for loop that prompts the user for a hobby 3 times.
+# hobbies = []
+# for eachinput in range(0,3):
+# 	hobby = input("Enter a hobby ")
+# 	hobbies.append(hobby)
+# print(hobbies)
+word = "Marble"
+for eachword in word:
+	if eachword == "a":
+		print("X", end="")
+	else:
+		print(eachword, end="")
+print("\n")
+#Looping over a dictionary you get the key which you can use to get the value
+dictionary = {"a": "apple", "b":"berry", "c":"cherry"}
+for getkey in dictionary:
+	print(getkey+" is the key for the value below")
+	print(dictionary[getkey])
+#enumerate works by supplying a corresponding index to each element in the list that you pass it. Each time you go through the loop, index will be one greater, and item will be the next item in the sequence. It's very similar to using a normal for loop with a list, except this gives us an easy way to count how many items we've seen so far.
+choices = ["pizza","pasta","salad","nachos"]
+print("Your choices are: ")
+for index, eachchoices in enumerate(choices):
+	print(index+1,eachchoices) #eachchoices should start at index 1.
+#Iterate at least two lists at once. Use the zip function  zip will create pairs of elements when passed two lists, and will stop at the end of the shorter list.
+lista = [3, 9, 17, 15, 19]
+listb = [2, 4, 8, 10, 30, 40, 50, 60, 70, 80, 90]
+for eachlista, eachlistb in zip(lista, listb):
+	print(eachlista)
+	print(eachlistb)
+	print(eachlista, eachlistb)
+#for loops may have an else associated with them.  the else statement is executed after the for if the for loop ends normally--not with a break.
+fruits = ['banana', 'apple', 'orange', 'tomato', 'pear', 'grape']
+for eachfruits in fruits:
+	if eachfruits == "tomato":
+		print(eachfruits+" is not a fruit.  It actually is a fruit")
+		break
+	else:
+		print(eachfruits)
+else:
+	print("A fine selection of fruits!")
+fruits = ['banana', 'apple', 'orange', 'pear', 'grape']
+for eachfruits in fruits:
+	if eachfruits == "tomato":
+		print(eachfruits+" is not a fruit.  It actually is a fruit")
+		break
+	else:
+		print(eachfruits)
+else:
+	print("A fine selection of fruits!")
+print("\n")
 
-			
-
+#Practice Makes Perfect
+#is even
+def iseven(number):
+	if number % 2 == 0:
+		return True
+	else:
+		return False
+print(iseven(100)) #print True
+print(iseven(101)) #print False
+#is int
+#a number with a decimal part that is all 0s is also an integer, such as 7.0.
+# def isint(number):
+# 	if type(number) == int:
+# 		return True
+# 	elif str(number) == str(number)+".0":
+# 		return True
+# 	else:
+# 		return False
+from math import floor
+def isint(number):
+	number += 0.0
+	numbery = floor(number)
+	if number == numbery:
+		return True	
+	else:
+		return False
+print(isint(-1)) #return True
+print(isint(5)) #return True
+print(isint(5.0)) #return True
+print(isint(5.9)) #return False
+#digit sum
+def digitsum(number):
+	digitssum = 0
+	for eachnumber in str(number):		
+		digitssum = int(eachnumber) + digitssum
+	print(digitssum)
+digitsum(1234) #return 10
+#factorial
+def factorial(number):
+	answer = 1
+	for eachnumber in range(1,number+1):
+		answer = eachnumber * answer
+	print(answer)
+factorial(4) #return 24
+factorial(1) #return 11
+factorial(3) #return 6
+#is prime
+#python program from william fiset primenumberprogram.py
+def isprime(number):
+	is_prime = True
+	for factor in range(2, number):
+		if number % factor == 0:
+			is_prime = False
+	if is_prime == True:
+		print(number,"is a prime number!")
+	else:
+		print(number,"is not a prime number!")
+isprime(5) #return 5 is a prime number!
+isprime(21) #return 21 is not a prime number!
+#reverse
+#may not use reversed or [::-1]
+def reverse(text):
+	initialize = len(text)
+	for eachinitialize in range(initialize-1,-1,-1):
+		print(text[eachinitialize],end = "")
+		initialize -= 1
+reverse("super! dog POO") #returned OOP god !repus
+print("\n")
+#antivowel
+def antivowel(text):
+	newword = []
+	vowels = ["A","E","I","O","U","a","e","i","o","u"]
+	for eachtext in text:
+		if eachtext not in vowels:
+			newword.append(eachtext)
+	print("".join(newword))	
+antivowel("Hey You!") #return Hy Y!
+#scrabble score
+def scrabblescore(word):
+	word = word.lower()
+	points = 0
+	score = {"a": 1, "c": 3, "b": 3, "e": 1, "d": 2, "g": 2, "f": 4, "i": 1, "h": 4, "k": 5, "j": 8, "m": 3, "l": 1, "o": 1, "n": 1, "q": 10, "p": 3, "s": 1, "r": 1, "u": 1, "t": 1, "w": 4, "v": 4, "y": 4, "x": 8, "z": 10}
+	for eachword in word:
+		points = points + score[eachword]
+	print(points)
+scrabblescore("Helix") #return 15
+scrabblescore("zztop") #return 25
+#censor
+def censor(text, word):	
+	asterik = "*"*len(word)	
+	newtextsplit = text.replace(word,asterik)
+	print(newtextsplit)
+censor("this hack is wack hack","hack") #return this **** is wack ****
+#count
+def count(sequence, item):
+	tally = 0
+	for eachsequence in sequence:
+		if eachsequence == item:
+			tally += 1
+	return tally
+print(count([1,2,1,1],1)) #print 3
+print(count(["apple",2,"bear",1,"apple"],"apple")) #print 2
+#purify
+def purify(filterlist):
+	for eachfilterlist in filterlist:
+		if eachfilterlist % 2 != 0:
+			filterlist.remove(eachfilterlist)
+	print(filterlist)
+purify([1,2,3,4,5,6,7,8,9,10]) #return [2, 4, 6, 8, 10]
+#digit sum
+def product(number):
+	digitsproduct = 1
+	for eachnumber in str(number):
+		digitsproduct = int(eachnumber) * digitsproduct
+	print(digitsproduct)
+product(1234) #return 24 1*2*3*4
+product(455) #return 100 4*5*5
+def productlist(number):
+	digitsproduct = 1
+	for eachnumber in number:
+		digitsproduct = eachnumber * digitsproduct
+	print(digitsproduct)
+productlist([1,2,3,4]) #return 24 1*2*3*4
+productlist([4,5,5]) #return 100 4*5*5
+#remove duplicates
+def removeduplicates(duplicatelist):
+	return set(duplicatelist)
+print(removeduplicates([1,1,2,2])) #print {1,2}
+print(list(removeduplicates([1,1,2,2]))) #print [1,2]
+#median
+import statistics
+example_list = [4,6,2,6,7,8,2,5,6,78,4,6,7,2,2,2]
+def median(medianlist):
+	y = statistics.median(medianlist)
+	print(y)
+median(example_list) #return 5.5
+median([1,1,2]) #return 1
+median([7, 12, 3, 1, 6]) #return 6
+median([7, 3, 1, 4]) #return 3.5
+#start Exam Statistics
