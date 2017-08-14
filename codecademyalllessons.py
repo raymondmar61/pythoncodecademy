@@ -721,4 +721,248 @@ median(example_list) #return 5.5
 median([1,1,2]) #return 1
 median([7, 12, 3, 1, 6]) #return 6
 median([7, 3, 1, 4]) #return 3.5
-#start Exam Statistics
+
+#9 Exam Statistics
+import statistics
+grades = [100, 100, 90, 40, 80, 100, 85, 70, 90, 65, 90, 85, 50.5]
+def average(grades):
+	print(statistics.mean(grades))
+	floater = (statistics.mean(grades))
+	print("%.2f" % floater)
+average(grades) #return 80.42307692307692\n 80.42
+def populationvariance(grades):
+	#A large variance indicates that the data is spread out; a small variance indicates it is clustered closely around the mean.
+	print(statistics.pvariance(grades))
+	floater = (statistics.pvariance(grades))
+	print("%.2f" % floater)
+populationvariance(grades) #return 334.07100591715977\n 334.07
+#If you have already calculated the mean of your data, you can pass it as the optional second argument mu to avoid recalculation
+grades2 = [100, 100, 90, 100, 85, 90, 90, 85]
+mu = statistics.mean(grades2)
+print(mu) #print 92.5
+print(statistics.pvariance(grades2, mu)) #print 37.5
+print(statistics.pvariance(grades2)) #print 37.5
+#Use variance() function when your data is a sample from a population. To calculate the variance from the entire population, see pvariance().  A large variance indicates that the data is spread out; a small variance indicates it is clustered closely around the mean.
+gradessample = [100, 100, 90, 40]
+grades2sample = [100, 100, 90, 100]
+print(statistics.variance(gradessample)) #print 825.0
+print(statistics.variance(grades2sample)) #print 25.0
+#The standard deviation is the square root of the variance. You can calculate the square root by raising the number to the one-half power.
+print(statistics.stdev(grades)) #print 19.02393903507516
+print(statistics.stdev(grades2)) #print 6.546536707079771
+print("\n")
+
+#10 Advanced Topics in Python
+ddictionary = {"Name":"Guido", "Age": 56, "BDFL": True}
+print(ddictionary) #print {'Age': 56, 'Name': 'Guido', 'BDFL': True}
+print(ddictionary.items()) #print dict_items([('BDFL', True), ('Age', 56), ('Name', 'Guido')]) #.items() returns an array of tuples with each tuple consisting of a key/value pair from the dictionary
+print(ddictionary.keys()) #print dict_keys(['BDFL', 'Name', 'Age'])
+print(ddictionary.values()) #dict_values([True, 'Guido', 56])
+for key in ddictionary:
+	print(key, ddictionary[key]) #print BDFL True\n Name Guido\n Age 56
+for i in range(1,12):
+	if i % 2 == 0:
+		i = i ** 2
+		print(i, end=" ") #print 4 16 36 64 100.  Even numbers squared
+print("\n")
+#List slicing allows us to access elements of a list in a concise manner. The syntax looks like this:  [start(inclusive):end(exclusive):stride]
+slicelist = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+print(slicelist[0:4]) #print [1, 4, 9, 16]
+print(slicelist[2:9:2]) #print [9, 25, 49, 81]
+print(slicelist[3:]) #print [16, 25, 36, 49, 64, 81, 100]
+print(slicelist[:2]) #print [1, 4]
+print(slicelist[::2]) #print [1, 9, 25, 49, 81]
+print(slicelist[::-1]) #print [100, 81, 64, 49, 36, 25, 16, 9, 4, 1]
+toonehundred = list(range(1,101))
+print(toonehundred[9::10]) #print [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+print(toonehundred[::-10]) #print [100, 90, 80, 70, 60, 50, 40, 30, 20, 10]
+to21 = list(range(1,22))
+print(to21[::2]) #print [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21].  Print odds.
+print(to21[7:14]) #print [8, 9, 10, 11, 12, 13, 14] print middle thirds 8 to 14 inclusive
+#the function the lambda creates is an anonymous function.  The lambda and the function bythree immediately below are the same.
+#lambda x: x % 3 == 0
+#def bythree(x):
+#	return x % 3 == 0
+mylist = range(1,16)
+answer = lambda x: x % 3 == 0, mylist
+print(answer) #(<function <lambda> at 0x7fbfd3b5e400>, range(1, 16))
+#RM:  I still don't understand lambda
+movies = {
+  "Monty Python and the Holy Grail": "Great",
+  "Monty Python's Life of Brian": "Good",
+  "Monty Python's Meaning of Life": "Okay"
+}
+for key in movies:
+	print(key, movies[key]) #print Monty Python and the Holy Grail Great\n Monty Python's Life of Brian Good\n Monty Python's Meaning of Life Okay
+garbled = "!XeXgXaXsXsXeXmX XtXeXrXcXeXsX XeXhXtX XmXaX XI"
+print(garbled[len(garbled):0:-2]) #print e secret message
+print("\n")
+
+#Skipped Introduction to Bitwise Operators
+
+#11 Introduction To Classes
+class Fruit(object):
+  """A class that makes various tasty fruits."""
+  def __init__(self, name, color, flavor, poisonous):
+    self.name = name
+    self.color = color
+    self.flavor = flavor
+    self.poisonous = poisonous
+  def description(self):
+    print("I'm a %s %s and I taste %s." % (self.color, self.name, self.flavor))
+  def is_edible(self):
+    if not self.poisonous:
+      print("Yep! I'm edible.")
+    else:
+      print("Don't eat me! I am super poisonous.")
+lemon = Fruit("lemon", "yellow", "sour", False)
+lemon.description() #print I'm a yellow lemon and I taste sour.
+lemon.is_edible() #print Yep! I'm edible.
+
+class Animal():
+	isalive = True
+	addlovescale = 5
+	health = "good"
+	def __init__(self, name, age, ishungry):
+		self.name = name
+		self.age = age
+		self.ishungry = ishungry
+		#self.isalive = isalive #excluded for class scope variables or member variables
+		#self.addlovescale = addlovescale #excluded for class scope variables or member variables
+	#When a class has its own functions, those functions are called methods.  __init__ is a method
+	def description(self):
+		print(self.name+" is age",self.age)
+zebra = Animal("Jeffrey",2,True)
+print(zebra.name) #print Jeffrey
+giraffe = Animal("Bruce",1,False)
+print(giraffe.age) #print 1
+panda = Animal("Chad",7,True)
+print(panda.ishungry) #print True
+print(panda.isalive) #print True
+print(zebra.addlovescale) #print 5
+zebra.description() #return Jeffrey is age 2
+hippo = Animal("Rebecca",3,False)
+hippo.description() #return Rebecca is age 3
+sloth = Animal("Sean",50,True)
+ocelot = Animal("Otto",19,False)
+print(sloth.health) #print good
+print(ocelot.health) #print good
+
+class ShoppingCart(object):
+  """Creates shopping cart objects
+  for users of our fine website."""
+  items_in_cart = {}
+  def __init__(self, customer_name):
+    self.customer_name = customer_name
+  def add_item(self, product, price):
+    """Add product to the cart."""
+    if not product in self.items_in_cart:
+      self.items_in_cart[product] = price
+      print(product + " added.")
+    else:
+      print(product + " is already in the cart.")
+  def remove_item(self, product):
+    """Remove product from the cart."""
+    if product in self.items_in_cart:
+      del self.items_in_cart[product]
+      print(product + " removed.")
+    else:
+      print(product + " is not in the cart.")
+mycart = ShoppingCart("Rocky")
+mycart.add_item("broccoli",.50) #return broccoli added
+mycart = ShoppingCart("Pop")
+mycart.add_item("coffee",10.20) #return coffee added
+print(ShoppingCart.items_in_cart) #print {'broccoli': 0.5, 'coffee': 10.2}
+
+class Customer(object):
+  """Produces objects that represent customers."""
+  def __init__(self, customer_id):
+    self.customer_id = customer_id
+  def display_cart(self):
+    print("I'm a string that stands in for the contents of your shopping cart!")
+class ReturningCustomer(Customer):
+  """For customers of the repeat variety."""
+  def display_order_history(self):
+    print("I'm a string that stands in for your order history!")
+monty_python = ReturningCustomer("ID: 12345")
+monty_python.display_cart() #return I'm a string that stands in for the contents of your shopping cart!
+monty_python.display_order_history() #return I'm a string that stands in for your order history
+#Inheritance works the following below:
+#class DerivedClass(BaseClass):
+#   code goes here
+#DerivedClass is the new class you're making and BaseClass is the class for which DerivedClass inherits
+class Shape(object):
+	def __init__(self, number_of_sides):
+		self.number_of_sides = number_of_sides
+class Triangle(Shape):
+	def __init__(self, side1, side2, side3):
+		self.side1 = side1
+		self.side2 = side2
+		self.side3 = side3
+
+class Employee(object):
+	def __init__(self, name):
+		self.name = name
+	def greet(self, other):
+		print("Hello, %s" % other.name)
+class CEO(Employee):
+	def greet(self, other):
+		print("Get back to work, %s!" % other.name)
+ceo = CEO("Emily")
+emp = Employee("Steve")
+emp.greet(ceo) #return Hello, Emily
+ceo.greet(emp) #return Get back to work, Steve!
+
+class Employee2(object):
+	def __init__(self, employee_name):
+		self.employee_name = employee_name
+	def calculate_wage(self, hours):
+		self.hours = hours
+		return hours * 20.00
+class PartTimeEmployee(Employee2):
+	def calculate_wage(self, hours):
+		self.hours = hours
+		return hours * 12.00
+	def fulltimewage(self, hours):
+		return super(PartTimeEmployee, self).calculate_wage(hours) #.calculated_wage is used at the Base Class Employee2 to calculate the full time wage in fulltimewage method
+matt = Employee2("matt")
+print(matt.calculate_wage(30)) #print 600.0 30*20.00
+matt = PartTimeEmployee("matt")
+print(matt.calculate_wage(30)) #print 360.00 30*12.00.  PartTimeEmployee("matt") needs BaseClass Employee2 to utilize matt
+#Working with a derived class (or subclass) and realize that you've overwritten a method or attribute defined in that class' base class (also called a parent or superclass) that you actually need.  Access the attributes or methods of a superclass with Python's built-in super call.
+milton = PartTimeEmployee("milton")
+print(milton.fulltimewage(10)) #print 200.0 10*20.00
+
+class Triangle():
+	numberofsides = 3
+	def __init__(self, angle1, angle2, angle3):
+		self.angle1 = angle1
+		self.angle2 = angle2
+		self.angle3 = angle3
+	def checkangles(self):
+		if self.angle1 + self.angle2 + self.angle3 == 180:
+			return True
+		else:
+			return False
+class Equilateral(Triangle):	
+	def isequilateral(self, angle1, angle2, angle3):
+		self.angle1 = angle1
+		self.angle2 = angle2
+		self.angle3 = angle3
+		if angle1 == 60 and angle2 == 60 and angle3 == 60:
+			print("Equilateral Triangle")
+		else:
+			print("Not Equilateral Triangle")
+alpha = Triangle(10,10,10)
+print(alpha.numberofsides) #print 3
+print(alpha.checkangles()) #print False
+beta = Triangle(100,45,35)
+print(beta.checkangles()) #print True
+beta = Equilateral(100,45,35)
+beta.isequilateral(100,45,35) #print not Equilaterial Triangle
+charlie = Equilateral(45,45,90)
+charlie.isequilateral(45,45,90) #print not Equilaterial Triangle
+delta = Equilateral(60,60,60)
+delta.isequilateral(60,60,60) #print Equilaterial Triangle
+#it seems Equilateral(Triangle) the Triangle in (Triangle) no need to include __init__ in Equilateral(Triangle) because Equilateral(Triangle) is using Triangle()'s __init__
+#start Classes
