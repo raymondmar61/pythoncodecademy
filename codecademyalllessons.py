@@ -965,4 +965,87 @@ charlie.isequilateral(45,45,90) #print not Equilaterial Triangle
 delta = Equilateral(60,60,60)
 delta.isequilateral(60,60,60) #print Equilaterial Triangle
 #it seems Equilateral(Triangle) the Triangle in (Triangle) no need to include __init__ in Equilateral(Triangle) because Equilateral(Triangle) is using Triangle()'s __init__
-#start Classes
+
+#Classes
+class Car():
+	initialcondition = "new" #condition is a member variable
+	def __init__(self, model, color, mpg):
+		self.model = model
+		self.color = color
+		self.mpg = mpg
+	def drivecar(self):
+		self.condition = "used"
+		return self.condition
+	def displaycar(self): #displaycar is like a function.  It's a method in a class.
+		print("This is a "+self.color+" "+self.model+" with",self.mpg,"MPG.")
+#We define a "child" class that inherits all of the variables and functions from its "parent".  Parent is Car().  Child is ElectricCar().
+class ElectricCar(Car):
+	def __init__(self, model, color, mpg, batterytype):
+		self.model = model
+		self.color = color
+		self.mpg = mpg
+		self.batterytype = batterytype
+	def driveelectriccar(self):
+		self.condition = "like new"
+		return self.condition
+mycar = Car("DeLorean","silver",88) #mycar is the new object which is an instance of Car()
+print(mycar.initialcondition) #print new
+mycar.displaycar() #return This is a silver DeLorean with 88 MPG.
+print(mycar.drivecar()) #print used
+myelectriccar = ElectricCar("Toyota","white",150,"molten salt")
+myelectriccar.displaycar() #return This is a white Toyota with 150 MPG.
+print(myelectriccar.driveelectriccar()) #print like new
+
+#__repr__() short for representation.  By providing a return value in this method, we can tell Python how to represent an object of our class.
+class point3d():
+	def __init__(self, x, y, z):
+		self.x = x
+		self.y = y
+		self.z = z
+	def __repr__(self):
+		return "(%d, %d, %d)" % (self.x, self.y, self.z)
+mypoint = point3d(1,2,3)
+print(mypoint) #print (1, 2, 3)
+
+#12 File Input/Output
+my_list = [i ** 2 for i in range(1, 11)] #Generates a list of squares of the numbers 1-10
+f = open("output.txt", "w")
+for item in my_list:
+  f.write(str(item) + "\n")
+f.close()
+
+myfile = open("output.txt","r+") #opens the file in read-write-mode and prepares Python to send data into the file output.txt.
+myfile.write("Data to be written") #The .write() method takes a string argument.
+myfile.close() #You must close the file. You do this simply by calling my_file.close(). If you don't close your file, Python won't write to it properly.
+#During the I/O process, data is buffered: this means that it is held in a temporary location before being written to the file.  Python doesn't flush the buffer—that is, write data to the file—until it's sure you're done writing. One way to do this is to close the file. If you write to a file without closing, the data won't make it to the target file.
+myfile = open("output.txt","r") #reopen output.txt because I closed output.txt at myfile.close().  I need to reopen to print myfile.
+print(myfile.read()) #print Data to be written64\n 81\n 100
+myfile.close()
+myfile = open("output.txt","r")
+print(myfile.readline()) #print Data to be written64.  readline() reads from a file line by line, rather than pulling the entire file in at once.  Subsequent calls to .readline() will return successive lines.  The next .readline() prints the second line which is 81.
+print(myfile.readline()) #print 81
+myfile.close()
+
+#File objects contain a special pair of built-in methods: __enter__() and __exit__(). The details aren't important, but what is important is that when a file object's __exit__() method is invoked, it automatically closes the file. How do we invoke this method? With with and as.  We don't explicitly close() our file.
+with open("output.txt","r") as readoutput:
+	readline = readoutput.readline()
+print(readline) #print Data to be written64
+with open("output.txt","r") as readoutput:
+	readlines = readoutput.readlines()
+print(readlines) #print ['Data to be written64\n', '81\n', '100\n']
+with open("output.txt","r") as readoutput:
+	read = readoutput.read()
+print(read) #print Data to be written64\n 81\n 100
+with open("output.txt","w") as writeoutput:
+	write = writeoutput.write("Overide output.txt")
+with open("output.txt","r") as readoutput:
+	read = readoutput.read()
+print(read) #print Overide output.txt
+#Test whether a file we've opened is closed
+#Python file objects have a closed attribute which is True when the file is closed and False otherwise.
+print(writeoutput.closed) #print True
+with open("output.txt","r") as readoutput:
+	read = readoutput.read()
+	print(readoutput.closed) #print False
+print(read) #print Overide output.txt
+print(readoutput.closed) #print True
