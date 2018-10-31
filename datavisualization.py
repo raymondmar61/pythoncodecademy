@@ -60,6 +60,17 @@ ycoffeespentperyear = [3000, 3005, 3010, 2900, 2950, 3050, 3000, 3100, 2980, 298
 # plt.title("Coffee Spent Per Year")
 # plt.axis([0, 12, 2900, 3100]) #Include the 12th year which was excluded in xyears = range(12)
 plt.show()
+'''
+#https://stackoverflow.com/questions/3777861/setting-y-axis-limit-in-matplotlib
+axes = plt.gca() #Get Current Axes
+axes.set_xlim([x1,x2])
+axes.set_ylim([y1,y2])
+x1,x2,y1,y2 = plt.axis()
+plt.axis((x1,x2,70,95)) #set y-axis only leave x1 as x1 and x2 as x2
+axes = plt.gca() #Get Current Axes
+axes.set_xlim([0,len(unit_topics)*2])  #there are ten bars or five unit_topics with two numbers per topic
+axes.set_ylim([70,90])
+'''
 
 #Subplots.  Display two lines side-by-side instead of the same set of x- and y-axes. Multiple axes or multiple charts in the same picture,  The picture or object that contains all of the subplots is called a figure.  We can have many different subplots in the same figure.  We can lay them out in many different ways. We can think of our layouts as having rows and columns of subplots.
 #.subplot().  .subplot(number of rows, number of columns, index number)  .subplot() goes first, .plot() goes second, .show() goes last.
@@ -415,9 +426,131 @@ plt.show()
 #histograms might have different numbers of samples, making one much bigger than the other.  To solve this, we can normalize our histograms using normed=True. This command divides the height of each column by a constant such that the total shaded area of the histogram sums to 1.
 bigdataset1 = [46622,92874,60191,12212,81275,44794,25632,56034,13040,62917]
 bigdataset2 = [904572,207366,873910,182220,416248,214926,751013,464412,441280,531012]
-plt.hist(bigdataset1, range=(10000,100001), bins=5)
-plt.hist(bigdataset2, range=(100000,1000001), bins=5)
+# plt.hist(bigdataset1, range=(10000,100001), bins=5)
+# plt.hist(bigdataset2, range=(100000,1000001), bins=5)
+# plt.show()
+# plt.hist(bigdataset1, range=(10000,100001), bins=5, alpha=.5, normed=True)
+# plt.hist(bigdataset2, range=(100000,1000001), bins=5, alpha=.5, normed=True)
 plt.show()
-plt.hist(bigdataset1, range=(10000,100001), bins=5, alpha=.5, normed=True)
-plt.hist(bigdataset2, range=(100000,1000001), bins=5, alpha=.5, normed=True)
+
+#Plot Types Multiple Choice Quiz
+'''
+Which line of code will create a bar graph with error bars displaying +/- 4 error, with caps of size 10?  plt.bar(x, y, yerr=4, capsize=10)
+What is the command to plot a bar graph in Matplotlib?  plt.bar
+What does it mean to normalize a histogram?  Normalizing is dividing the height of each column by a constant such that the area under the curve sums to 1.
+What is the result of adding autopct='%d%%' to a plt.pie function call?  The pie chart will now display percentages, rounded to the nearest int, on each slice of the pie.
+What type of graph would work best to display the proportion of team members who own a cat, dog, bird, or no pet? (Assume each team member can only own one pet.)  Pie
+What is the command to divide the data in a histogram into 10 equally-sized bins?  plt.hist(data, bins=10)
+In the following function call, what does the list [0, 2, 4, 6, 8] represent?  plt.fill_between(range(5), [0, 2, 4, 6, 8], [4, 6, 8, 10, 12], alpha=0.2)  The lower-bound y-values to plot
+What are the inputs to the plt.bar function, in order?  x values (list of numbers), y values (list of numbers)
+What type of graph would work best to display the change in temperature in a city over time?  Line
+What is the command to stack a set of bars representing y2 on top of the set of bars representing y1?  plt.bar(range(len(y2)), y2, bottom=y1)
+What is the command to set x-axis ticks to be "Carbohydrates", "Lipids", "Protein"?  ax.set_xticklabels(["Carbohydrates", "Lipids", "Protein"])
+'''
+
+#Recreate graphs using Matplotlib! Interactive Lesson
+past_years_averages = [82, 84, 83, 86, 74, 84, 90]
+years = [2000, 2001, 2002, 2003, 2004, 2005, 2006]
+error = [1.5, 2.1, 1.2, 3.2, 2.3, 1.7, 2.4]
+# plt.figure(figsize=(10,8))
+# plt.bar(years,past_years_averages, yerr=error, capsize=5)
+# plt.title("Final Exam Averages")
+# plt.xlabel("Year")
+# plt.ylabel("Test average")
+# x1,x2,y1,y2 = plt.axis()
+# plt.axis((x1,x2,70,95)) #https://stackoverflow.com/questions/3777861/setting-y-axis-limit-in-matplotlib
 plt.show()
+#plt.savefig("my_bar_chart.png")
+
+import numpy as np
+unit_topics = ['Limits', 'Derivatives', 'Integrals', 'Diff Eq', 'Applications']
+middle_school_a = [80, 85, 84, 83, 86]
+middle_school_b = [73, 78, 77, 82, 86]
+ind = np.arange(len(unit_topics))
+width = 0.8
+#middle_school_a
+n = 1 # This is our first dataset (out of 2)
+t = 2 # Number of datasets 
+d = len(middle_school_a) # Number of sets of bars 
+w = 0.8 # Width of each bar 
+middle_school_a_x = [t*element + w*n for element in range(d)]
+#middle_school_b
+n = 2 # This is our first dataset (out of 2)
+t = 2 # Number of datasets 
+d = len(middle_school_b) # Number of sets of bars 
+w = 0.8 # Width of each bar 
+middle_school_b_x = [t*element + w*n for element in range(d)]
+# plt.figure(figsize=(10,8))
+# plt.title("Test Averages on Different Units")
+# plt.xlabel("Unit")
+# plt.ylabel("Test Average")
+# ax=plt.subplot()
+# axes = plt.gca() #Get Current Axes
+# axes.set_xlim([0,len(unit_topics)*2])  #there are ten bars
+# axes.set_ylim([70,90])
+# # or
+# # x1,x2,y1,y2 = plt.axis()
+# # plt.axis((0,len(unit_topics)*2,70,90))
+# plt.bar(middle_school_a_x,middle_school_a, label="Middle School A")
+# plt.bar(middle_school_b_x,middle_school_b, label="Middle School B")
+# plt.legend(loc=1)
+# ax.set_xticks(((ind+width)*2)-.415)
+# ax.set_xticklabels(unit_topics)
+plt.show()
+
+import numpy as np
+unit_topics = ['Limits', 'Derivatives', 'Integrals', 'Diff Eq', 'Applications']
+As = [6, 3, 4, 3, 5]
+Bs = [8, 12, 8, 9, 10]
+Cs = [13, 12, 15, 13, 14]
+Ds = [2, 3, 3, 2, 1]
+Fs = [1, 0, 0, 3, 0]
+x = range(0,len(unit_topics))
+c_bottom = np.add(As, Bs)
+d_bottom = np.add(c_bottom, Cs)
+f_bottom = np.add(d_bottom, Ds)
+# plt.figure(figsize=(10,8))
+# plt.title('Grade distribution')
+# plt.xlabel('Unit')
+# plt.ylabel('Number of Students')
+# plt.bar(x,As)
+# plt.bar(x,Bs, bottom=As)
+# plt.bar(x,Cs, bottom=c_bottom)
+# plt.bar(x,Ds, bottom=d_bottom)
+# plt.bar(x,Fs, bottom=f_bottom)
+# ax = plt.subplot()
+# ax.set_xticks(x)
+# ax.set_xticklabels(unit_topics)
+plt.show()
+
+exam_scores1 = [62.58, 67.63, 81.37, 52.53, 62.98, 72.15, 59.05, 73.85, 97.24, 76.81, 89.34, 74.44, 68.52, 85.13, 90.75, 70.29, 75.62, 85.38, 77.82, 98.31, 79.08, 61.72, 71.33, 80.77, 80.31, 78.16, 61.15, 64.99, 72.67, 78.94]
+exam_scores2 = [72.38, 71.28, 79.24, 83.86, 84.42, 79.38, 75.51, 76.63, 81.48,78.81,79.23,74.38,79.27,81.07,75.42,90.35,82.93,86.74,81.33,95.1,86.57,83.66,85.58,81.87,92.14,72.15,91.64,74.21,89.04,76.54,81.9,96.5,80.05,74.77,72.26,73.23,92.6,66.22,70.09,77.2]
+# plt.figure(figsize=(10,8))
+# plt.title("Final Exam Score Distribution")
+# plt.xlabel("Percentage")
+# plt.ylabel("Frequency")
+# plt.hist(exam_scores1, bins=12, normed=True, histtype="step", linewidth=2, label="1st Yr Teaching")
+# plt.hist(exam_scores2, bins=12, normed=True, histtype="step", linewidth=2, label="2nd Yr Teaching")
+# plt.legend()
+plt.show()
+
+unit_topics = ['Limits', 'Derivatives', 'Integrals', 'Diff Eq', 'Applications']
+num_hardest_reported = [1, 3, 10, 15, 1]
+# plt.figure(figsize=(10,8))
+# plt.pie(num_hardest_reported, labels=unit_topics, autopct="%1d%%")
+# plt.title("Hardest Topics")
+# plt.axis("equal")
+plt.show()
+
+hours_reported =[3, 2.5, 2.75, 2.5, 2.75, 3.0, 3.5, 3.25, 3.25,  3.5, 3.5, 3.75, 3.75,4, 4.0, 3.75,  4.0, 4.25, 4.25, 4.5, 4.5, 5.0, 5.25, 5, 5.25, 5.5, 5.5, 5.75, 5.25, 4.75]
+exam_scores = [52.53, 59.05, 61.15, 61.72, 62.58, 62.98, 64.99, 67.63, 68.52, 70.29, 71.33, 72.15, 72.67, 73.85, 74.44, 75.62, 76.81, 77.82, 78.16, 78.94, 79.08, 80.31, 80.77, 81.37, 85.13, 85.38, 89.34, 90.75, 97.24, 98.31]
+plt.figure(figsize=(10,8))
+hours_lower_bound = [eachyvalue*.80 for eachyvalue in hours_reported]
+hours_upper_bound = [eachyvalue*1.2 for eachyvalue in hours_reported]
+plt.title("Time spent studying vs final exam scores")
+plt.xlabel("Score")
+plt.ylabel("Hours studying (self-reported)")
+plt.fill_between(exam_scores, hours_lower_bound, hours_upper_bound, alpha=0.2)
+plt.plot(exam_scores, hours_reported, linewidth=2)
+plt.show()
+plt.savefig("my_line_graph.png")
