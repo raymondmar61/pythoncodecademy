@@ -87,5 +87,86 @@ In Seaborn, bar charts are not able to visualize:  Distributions
 Which function would you use to draw the following plot?  sns.kdeplot()  *wave lines like multiple bell shape curves in one chart*
 What does the following code snippet do?  df = pd.read_csv("file.csv").  Creates a DataFrame named df made up of the data in the file file.csv.
 What does the box in the center of the violin plot represent?  The interquartile range.  A violin plot can also visualize confidence intervals.
-
 '''
+
+#Seaborn Styling, Part 1: Figure Style and Scale
+#Seaborn has five built-in themes to style its plots: darkgrid, whitegrid, dark, white, and ticks. Seaborn defaults to using the darkgrid theme for its plots.
+#To use any of the preset themes pass the name of it to sns.set_style().
+#Spines are the borders of the figure that contain the visualization. By default, an image has four spines.
+#You can automatically take away the top and right spines using the sns.despine() function. Note: this function must be called after you have called your plot.  You can also specify how many spines you want to include by calling despine() and passing in the spines you want to get rid of, such as: left, bottom, top, right; e.g. sns.despine(left=True, bottom=True) removes all spines; i.e. set True means remove spine.  
+#You can set the visual format, or context, using sns.set_context().  There are three levels of complexity:  Pass in one parameter that adjusts the scale of the plot; Pass in two parameters - one for the scale and the other for the font size; Pass in three parameters - including the previous two, as well as the rc with the style parameter that you want to override.
+#There are three levels of complexity:  Pass in one parameter that adjusts the scale of the plot; Pass in two parameters - one for the scale and the other for the font size; Pass in three parameters - including the previous two, as well as the rc with the style parameter that you want to override.  In order of relative size they are: paper, notebook, talk, and poster. The notebook style is the default.
+#You are also able to change the size of the text using the font_scale parameter.  You may want to also change the line width so it matches. We do this with the rc parameter.  rc stands for run command.
+#more changes using rc= below:
+'''
+{'axes.labelsize': 17.6,
+ 'axes.titlesize': 19.200000000000003,
+ 'font.size': 19.200000000000003,
+ 'grid.linewidth': 1.6,
+ 'legend.fontsize': 16.0,
+ 'lines.linewidth': 2.8000000000000003,
+ 'lines.markeredgewidth': 0.0,
+ 'lines.markersize': 11.200000000000001,
+ 'patch.linewidth': 0.48,
+ 'xtick.labelsize': 16.0,
+ 'xtick.major.pad': 11.200000000000001,
+ 'xtick.major.width': 1.6,
+ 'xtick.minor.width': 0.8,
+ 'ytick.labelsize': 16.0,
+ 'ytick.major.pad': 11.200000000000001,
+ 'ytick.major.width': 1.6,
+ 'ytick.minor.width': 0.8}
+'''
+df = pd.read_csv('survey.csv')
+# sns.set_style("white")
+# sns.set_context("poster", font_scale = 1.5, rc={"grid.linewidth": 0.6})
+# sns.barplot(x="Gender", y="Response", data=df, estimator=len) #count all responses by gender
+# sns.despine(left=False, bottom=True)
+plt.show()
+
+#Seaborn Styling, Part 2: Color
+#You can build color palettes using the function sns.color_palette().  This function can take any of the Seaborn built-in palettes.  # Save a palette to a variable: palette = sns.color_palette("bright") # Use palplot and pass in the variable: sns.palplot(palette) plt.show().
+#To select and set a palette in Seaborn, use the command sns.set_palette() and pass in the name of the palette that you would like to use.  If you do not pass in a color palette to sns.color_palette() or sns.set_palette(), Seaborn will use a default set of colors. These defaults improve upon the Matplotlib default color palettes and are one significant reason why people choose to use Seaborn for their data visualizations.  Seaborn has six variations of its default color palette: deep, muted, pastel, bright, dark, and colorblind.
+df = pd.read_csv('survey.csv')
+# sns.set_palette("pastel")
+# sns.barplot(data=df, x="Gender", y="Response", hue="Age Range")
+plt.show()
+#Seaborn also allows you to style Matplotlib plots. If you're using a plot that only exists in Matplotlib, such as a histogram, you can do so using Seaborn defaults.  To do so, call the sns.set() function before your plot.  RM:  examples are bad.
+#Seaborn also allows the use of Color Brewer palettes.  The color palettes are specifically chosen to be easy to interpret when used to represent ordered categories.  Pass the name of any Color Brewer palette directly to any of the color functions.
+#RM:  I can't figure out how to use the sns.color_palette to charts.  No examples.
+# diverging_colors = sns.color_palette("RdBu", 10)
+# sns.palplot(diverging_colors)
+# custom_palette = sns.color_palette("Paired", 9)
+# sns.palplot(custom_palette)
+plt.show()
+
+#Visualizing World Cup Data With Seaborn Freedom Project
+from matplotlib import pyplot as plt
+import pandas as pd
+import seaborn as sns
+df = pd.read_csv('WorldCupMatches.csv')
+#print(df.head())
+'''
+   PRIKEY  Year        ...         Home Team Initials Away Team Initials
+0       0  1930        ...                        FRA                MEX
+1       1  1930        ...                        USA                BEL
+2       2  1930        ...                        YUG                BRA
+3       3  1930        ...                        ROU                PER
+4       4  1930        ...                        ARG                FRA
+
+[5 rows x 21 columns]
+'''
+df=df[["Year","Home Team Goals","Away Team Goals"]]
+df["Total Goals"] = df["Home Team Goals"]+df["Away Team Goals"] #Source:  https://stackoverflow.com/questions/25748683/pandas-sum-dataframe-rows-for-given-columns
+print(df.groupby(["Year"])["Home Team Goals"].sum())
+print(df.groupby(["Year"])["Total Goals"].sum().reset_index())
+print(df.groupby(["Year"])["Home Team Goals","Away Team Goals"].sum())
+#also
+print(df.groupby(["Year"])[["Home Team Goals"]+["Away Team Goals"]].sum())
+print(df.groupby(["Year"])["Total Goals"].sum().reset_index()) #Source:  https://stackoverflow.com/questions/32751229/pandas-sum-by-groupby-but-exclude-certain-columns
+datareference = df.groupby(["Year"])["Total Goals"].sum().reset_index() #Source:  https://stackoverflow.com/questions/32751229/pandas-sum-by-groupby-but-exclude-certain-columns
+sns.set_style("whitegrid")
+sns.set_context("poster", font_scale = 0.25)
+plt.figure(figsize=(12,7)) #RM:  .figure() is before .plot()
+sns.barplot(x="Year",y="Total Goals", data=datareference)
+plt.show()
