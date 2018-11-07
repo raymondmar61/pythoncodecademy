@@ -174,3 +174,58 @@ double_batch = cupcakes * 2
 print(double_batch) #print [4.  1.5 4.  2.  1. ]
 grocery_list = cookies + double_batch
 print(grocery_list) #print [6.75 3.   5.   2.   2.  ]
+print("\n")
+
+store_one = np.array([2, 5, 8, 3, 4, 10, 15, 5])
+store_two = np.array([3, 17, 18,  9,  2, 14, 10])
+store_three = np.array([7, 5, 4, 3, 2, 7, 7])
+recipes = list([store_one]+[store_two]+[store_three])
+print(recipes) #[array([ 2,  5,  8,  3,  4, 10, 15,  5]), array([ 3, 17, 18,  9,  2, 14, 10]), array([7, 5, 4, 3, 2, 7, 7])]
+recipes = np.array(recipes)
+print(recipes) #print [array([ 2,  5,  8,  3,  4, 10, 15,  5]) array([ 3, 17, 18,  9,  2, 14, 10]) array([7, 5, 4, 3, 2, 7, 7])]
+print(list(store_one)) #print [2, 5, 8, 3, 4, 10, 15, 5]
+recipesindividuallist = list([store_one])+list([store_two])+list([store_three])
+print(recipesindividuallist) #print [array([ 2,  5,  8,  3,  4, 10, 15,  5]), array([ 3, 17, 18,  9,  2, 14, 10]), array([7, 5, 4, 3, 2, 7, 7])]
+storeonelist = list(store_one)
+storetwolist = list(store_two)
+storethreelist = list(store_three)
+storealllists = list([storeonelist]+[storetwolist]+[storethreelist])
+print(type(storeonelist)) #print <class 'list'>
+print(storealllists) #print [[2, 5, 8, 3, 4, 10, 15, 5], [3, 17, 18, 9, 2, 14, 10], [7, 5, 4, 3, 2, 7, 7]]
+storeallarrays = np.array(storealllists)
+print(storeallarrays) #print [list([2, 5, 8, 3, 4, 10, 15, 5]) list([3, 17, 18, 9, 2, 14, 10]) list([7, 5, 4, 3, 2, 7, 7])]
+print(type(storeallarrays)) #print <class 'numpy.ndarray'>
+
+#concatenate
+store_one = np.array([2, 5, 8, 3, 4, 10, 15, 5])
+store_two = np.array([3, 17, 18,  9,  2, 14, 10])
+store_three = np.array([7, 5, 4, 3, 2, 7, 7])
+best_seller = np.concatenate((store_one,store_two,store_three),axis=0)
+print(best_seller) #print [ 2  5  8  3  4 10 15  5  3 17 18  9  2 14 10  7  5  4  3  2  7  7].  Combine multiple arrays to one array.  However . . .
+matchingarrayone = np.array([2,5,7,9,8])
+matchingarraytwo = np.array([1,4,5,7,8])
+matchingarrayonetwo = np.concatenate((matchingarrayone,matchingarraytwo), axis=0)
+print(matchingarrayonetwo) #print [2 5 7 9 8 1 4 5 7 8]
+matchingarrayonetwo = np.concatenate((matchingarrayone,matchingarraytwo.T), axis=None)
+print(matchingarrayonetwo) #print [2 5 7 9 8 1 4 5 7 8]
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6]])
+print(np.concatenate((a, b), axis=0)) #print [[1 2] [3 4] [5 6]]
+
+store_one = ([2, 5, 8, 3, 4, 10, 15, 5])
+store_two = ([3, 17, 18, 9, 2, 14, 10])
+store_three = ([7, 5, 4, 3, 2, 7, 7])
+storelists = list([store_one]+[store_two]+[store_three])
+print(storelists) #print [[2, 5, 8, 3, 4, 10, 15, 5], [3, 17, 18, 9, 2, 14, 10], [7, 5, 4, 3, 2, 7, 7]]
+storeklistarray = np.array(storelists)
+print(storeklistarray) #print [list([2, 5, 8, 3, 4, 10, 15, 5]) list([3, 17, 18, 9, 2, 14, 10]) list([7, 5, 4, 3, 2, 7, 7])]
+
+#store_one, store_two, store_three number of items must match
+store_onematch = ([2, 5, 8, 3, 4, 10])
+store_twomatch = ([3, 17, 18, 9, 2, 14])
+store_threematch = ([7, 5, 4, 3, 2, 7])
+storelistsmatch = list([store_onematch]+[store_twomatch]+[store_threematch])
+print(storelistsmatch) #print [[2, 5, 8, 3, 4, 10], [3, 17, 18, 9, 2, 14], [7, 5, 4, 3, 2, 7]]
+storeklistarraymatch = np.array(storelistsmatch)
+print(storeklistarraymatch) #print [[ 2  5  8  3  4 10]  [ 3 17 18  9  2 14] [ 7  5  4  3  2  7]]
+print(np.concatenate((store_onematch, store_twomatch, store_threematch), axis=0)) #print [ 2  5  8  3  4 10  3 17 18  9  2 14  7  5  4  3  2  7]
