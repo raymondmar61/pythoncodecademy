@@ -159,9 +159,56 @@ print(sunflowers_std) #print 1.123322250068964
 sunflowers_normal = np.random.normal(loc=sunflowers_mean, scale=sunflowers_std, size=5000)
 #plt.hist(sunflowers_normal) #x-axis is height of sunflowers, y-axis is number of sunflowers at the x-axis height totaling 5,000.  RM:  it's random generating normal distribution
 plt.show()
-#10% of sunflowers that are planted fail to bloom. We planted 200, and want to know the probability that fewer than 20 will fail to bloom.  Generate 5,000 binomial random numbers that represent our situation.
+#10% of sunflowers that are planted fail to bloom. We planted 200, and want to know the probability that fewer than 20 will fail to bloom.  Generate 5,000 binomial random numbers that represent our situation.  np.random.binomial(number of trials, probability of success, size=number of experiments).
 experiments = np.random.binomial(200, .10, size=5000)
 prob = np.mean(experiments<20) #What percent of experiments had fewer than 20 sunflowers fail to bloom?  RM:  it's random generating percentage
 print(prob) #print .4684
 
 #Statistical Distributions with NumPy Multiple Choice Quiz
+'''
+What is a histogram?  A chart that creates equally spaced bins and counts how many values from our dataset fall into each bin.
+In a normal distribution, how much of the data lies within one standard deviation?  68%
+What type of distribution does this graph represent?  Bimodal distribution.  This graph has two peaks, so we would describe it as bimodal distribution.
+Why do we use binomial distributions?  Because they are effective at helping us understand the different probabilities that an event will occur.  Binomial distributions are excellent at predicting if an event will occur given probability and sample size.
+How many peaks does a unimodal dataset have?  One.
+Which of the following are the correct keyword arguments for generating a random distribution using np.random.binomial?  
+Which of the following are the correct keyword arguments for generating a random distribution using np.random.binomial?  N, P, size.  N is the number of trials, P is the probability of success, and size relates to the number of experiments.
+Select the graph that represents a skew-left dataset.  We can tell because the left tail is longer.
+The average height of a male giraffe is 16.3 feet with a standard deviation of 3.3 feet. Which of the following will generate a random distribution of 1000 male giraffe heights using np.random.normal?  np.random.normal(loc = 16.3, scale = 3.3, size = 1000)
+'''
+
+#Election Results Freeform Project
+#A survey to determine how many people would vote for Cynthia Ceballos vs. Justin Kerrigan in the mayoral election.  Compare the survey responses to the actual results.
+survey_responses = ['Ceballos', 'Kerrigan', 'Ceballos', 'Ceballos', 'Ceballos','Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Ceballos', 
+'Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Ceballos', 'Ceballos', 'Ceballos', 'Ceballos',
+'Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Ceballos', 'Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Ceballos',
+'Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Ceballos', 'Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Kerrigan', 'Kerrigan', 'Ceballos', 'Ceballos', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Kerrigan', 'Ceballos']
+survey_responses = np.array(survey_responses)
+print(survey_responses)
+print(survey_responses[(survey_responses == "Ceballos")]) #print ['Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos']
+total_ceballos = survey_responses[(survey_responses == "Ceballos")]
+print(total_ceballos) #print ['Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos' 'Ceballos']
+print(total_ceballos.size) #print 33
+print(survey_responses.size) #print 70
+percentage_ceballos = total_ceballos.size/survey_responses.size
+print(percentage_ceballos) #print 0.4714285714285714
+#In the real election, 54% of the 10,000 town population voted for Cynthia Ceballos.  Generate a binomial distribution that takes the number of total survey responses, the actual success rate, and the size of the town's population as its parameters. Then divide the distribution by the number of survey responses. Save your calculation to the variable possible_surveys.
+possible_surveys = np.random.binomial(70, .54, size=10000)
+print(possible_surveys) #print [43 32 40 ... 33 38 37]  #RM:  number of survey responses voted for Ceballos out of 70 total survey_responses.size
+possible_surveys = possible_surveys / survey_responses.size
+print(possible_surveys) #print [0.61428571 0.45714286 0.57142857 ... 0.47142857 0.54285714 0.52857143] #RM:  number of survey responses voted for Ceballos out of 70 total survey_responses.size as a percentage
+#plt.hist(possible_surveys, range=(0,1), bins=20)
+plt.show()
+#47% of people we surveyed said they would vote for Ceballos, but 54% of people voted for Ceballos in the actual election.  Calculate the percentage of surveys that could have an outcome of Ceballos receiving less than 50% of the vote and save it to the variable ceballos_loss_surveys.
+ceballos_loss_surveys = np.mean(possible_surveys < .50)
+print(ceballos_loss_surveys) #print 0.2179
+#With this current poll of 70 responses, about 20% of the time a survey output would predict Kerrigan winning, even if Ceballos won the actual election.  Your co-worker points out that your poll would be more accurate if it had more responders.  Generate another binomial distribution, but this time, see what would happen if you had instead surveyed 7,000 people. Divide the distribution by the size of the survey and save your findings to large_survey.
+large_survey = np.random.binomial(7000, .54, size=10000)
+print(large_survey) #print [3795 3798 3902 ... 3715 3863 3812]  #RM:  number of survey responses voted for Ceballos out of 7000
+large_survey = large_survey / 7000
+print(large_survey) #print [0.54214286 0.54257143 0.55742857 ... 0.53071429 0.55185714 0.54457143] #RM:  number of survey responses voted for Ceballos out of 7000 as a percentage
+#plt.hist(large_survey, range=(0,1), bins=20)
+plt.show()
+#recalculate the percentage of surveys that would have an outcome of Ceballos losing and save it to the variable ceballos_loss_new
+ceballos_loss_new = np.mean(large_survey < .50)
+print(ceballos_loss_new) #print 0.0  RM:  Ceballos wins election.  7,000 responses instead of 70 respones.  The new probability Ceballos receives less than 50% with 7,000 responses is 0.0.
