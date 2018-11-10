@@ -210,3 +210,51 @@ If we perform an ANOVA test on 3 datasets and reject the null hypothesis, what t
 Let's say we are comparing the time that users spend on three different versions of a landing page for a website. What test do we use to determine if there is a significant difference between any two of the sets? ANOVA
 You've collected data on 1000 different sites that end with .com, .edu, and .org and have recorded the number of each that have Times New Roman, Helvetica, or another font as their main font. What test can you use to determine if there's a relationship between top-level domain and font type?  Chi Square
 '''
+
+#Familiar: A Study In Data Analysis
+veinlifespans = [76.93767431, 75.99335913, 74.79815012, 74.50202147, 77.48888898, 72.14256573, 75.99303167, 76.34155048, 77.48475563, 76.53210148, 76.25508955, 77.58398317, 77.04737035, 72.87475175, 77.43504547, 77.49234141, 78.32672047, 73.34370247, 79.96915765, 74.83800583]
+#we want to show is that our most basic package, the Vein Pack, actually has a significant impact on the subscribers.
+veinlifespans = np.array(veinlifespans)
+print(np.mean(veinlifespans)) #print 76.169013356
+#If the average lifespan of a Vein Pack subscriber is significantly different from the average life expectancy of 71 years.  Use the 1-Sample T-Test to compare vein_pack_lifespans to the average life expectancy 71 with the average veinlifespans 76.169013356. Save the result into a variable called vein_pack_test.
+tstat, pval = ttest_1samp(veinlifespans, 71)
+vein_pack_test = pval
+#Let's check if the results are significant! Check the pvalue of vein_pack_test. If it's less than 0.05, we've got significance!  If the test's p-value is less than 0.05, print "The Vein Pack Is Proven To Make You Live Longer!". Otherwise print "The Vein Pack Is Probably Good For You Somehow!"
+#Generally, if we receive a p-value of less than 0.05, we can reject the null hypothesis and state that there is a significant difference.  RM:  In contrast, if we receive a p-value of more than 0.05, we accept the null hypothesis and state that there is no significant difference.
+print(vein_pack_test) #print 2.7463118036299626e-10
+if vein_pack_test < 0.05:
+  print("The Vein Pack Is Proven to Make You Live Longer") #print The Vein Pack Is Proven to Make You Live Longer.  RM:  there is significnat difference between the average life psan 71 and the Vein Pack average life 76.169013356
+else:
+  print("The Vein Pack Is Probably Good For You Somehow!")
+#We'd like to compare this lifespan data between our different packages. Our next step up from the Vein Pack is the Artery Pack. Let's get the lifespans of Artery Pack subscribers.
+arterylifespans = [76.33537008, 76.92308232, 75.95244164, 74.54498348, 76.40450428, 73.07924889, 77.02354461, 74.11742042, 77.38650656, 73.04476584, 74.96311851, 73.31954302, 75.85740138, 76.15265351, 73.35510286, 73.90221256, 73.77121195, 68.3148983,  74.63975718, 78.38547731]
+print(arterylifespans)
+#we want to show that the subscribers to the Artery Pack experience a significant improvement even beyond what a Vein Pack subscriber's benefits. Import the 2 Sample T-Test and we'll use that to see if there is a significant difference between the two subscriptions.
+arterylifespans = np.array(arterylifespans)
+print(np.mean(arterylifespans)) #print 74.87366223500001
+tstatstic, pval = ttest_ind(veinlifespans, arterylifespans)
+package_comparison_results = pval
+print(package_comparison_results) #print 0.05588883085502891
+if package_comparison_results < 0.05:
+  print("The Artery Package guarantees even stronger results!")
+else:
+  print("The Artery Package is also a great product!!") #print The Artery Package is also a great product!!  RM:  there is no significant difference between the Vein Pack average 76.169013356 and the Artery Life Pack average 74.87366223500001
+
+#Shame that it's not significantly better, but maybe there's a way to demonstrate the benefits of the Artery Package yet.
+#we've sent out a survey collecting the iron counts for our subscribers, and filtered that data into "low", "normal", and "high".  We received 200 responses from our Vein Package subscribers. 70% of them had low iron counts 140, 20% had normal 40, and 10% of them have high iron counts 20.  We were only able to get 145 responses from our Artery Package subscribers, but only 20% of them had low iron counts 29. 60% had normal 87, and 20% have high iron counts 29.
+iron_contingency_table = [[140, 29], [40, 87], [20, 29]]  #rows top to bottom low, normal, high.  columns left to right Vein Package subscribers and Artery Package subscribers
+#We want to be able to tell if what seems like a higher number of our Artery Package subscribers is a significant difference from what was reported by Vein Package subscribers. Import the Chi-Squared test so that we can find out.  Run the Chi-Squared test on the iron_contingency_table and save the p-value in a variable called iron_pvalue.
+chi2, pval, dof, expected = chi2_contingency(iron_contingency_table)
+print(pval) #print 2.9227133549883315e-19
+iron_pvalue = pval
+#If the iron_pvalue is less than 0.05, print out "The Artery Package Is Proven To Make You Healthier!" otherwise we'll have to use our other marketing copy: "While We Can't Say The Artery Package Will Help You, I Bet It's Nice!"
+if iron_pvalue < 0.05:
+  print("The Artery Package Is Proven To Make You Healthier!") #print The Artery Package Is Proven To Make You Healthier!  RM:  there is significant difference between the Artery Package and the Vein Package survey responses.  RM:  Shouldn't there be no significant difference because you want both Vein and Artery to make humans healthier?  Not Vein yes healthier and Artery no healthier?
+
+else:
+  print("While We Can't Say The Artery Package Will Help You, I Bet It's Nice!")
+#Fantastic! With proven benefits to both of our product lines, we can definitely ramp up our marketing and sales. RM:  The chi2_contingency statistic proves the Artery Package is healthy because we used the survey reponses.  The 2 Sample T-Test proves the ARtery Package is not as healthy.
+#Generally, if we receive a p-value of less than 0.05, we can reject the null hypothesis and state that there is a significant difference.  RM:  In contrast, if we receive a p-value of more than 0.05, we accept the null hypothesis and state that there is no significant difference.
+
+#FetchMaker: A Study In Data Analysis
+#RM:  create file scipyfetchmaker.py
